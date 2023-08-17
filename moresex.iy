@@ -1,5 +1,6 @@
 local commands = {}
 local oldhip 
+local Number = 1
 commands["gbang"] = {
     ["ListName"] = "gbang [plr]",
     ["Description"] = "Get banged by a player.",
@@ -32,8 +33,23 @@ commands["gbang"] = {
 				end)
 			end
 		else
-			notify('R15 Required','This command requires the r15 rig type')
+			local players = getPlayer(args[1], speaker)
+			for i,plr in pairs(players) do
+				gbangDied = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+					gbangLoop:Disconnect()
+					gbangDied:Disconnect()
+				end)
+	gbangLoop = game:GetService('RunService').Heartbeat:Connect(function()
+	pcall(function()
+	  Number = Number + 10
+     local Number2 = math.rad(Number)
+     local Number3 = math.sin(Number2) 
+getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.5,-Number3-2) * CFrame.Angles(math.rad(270),math.rad(0),math.rad(0))
+			end)
+			end)
+			Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Sit = true			
 		end
+	 end
     end
 }
 commands["ungbang"] = {
@@ -43,8 +59,10 @@ commands["ungbang"] = {
     ["Function"] = function(args, speaker)
         if gbangLoop then
 			gbangLoop:Disconnect()
+			pcall(function()
 			GBANGAnim:Destroy()
 			GBANGtrack:Stop()
+			end)
 			Players.LocalPlayer.Character.Animate.Disabled = false
 			gbangDied:Disconnect()
 		end
@@ -84,7 +102,7 @@ commands["suck"] = {
 					SuckDied:Disconnect()
 				end)
 				SuckLoop = game:GetService('RunService').Stepped:Connect(function()
-getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.75,-1.45) * CFrame.Angles(0,math.rad(180),0)
+getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.85,-1.45) * CFrame.Angles(0,math.rad(180),0)
 				end)
 			end
 		else
@@ -111,7 +129,7 @@ getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidR
 				end)
 	 				SuckLoop = game:GetService('RunService').Stepped:Connect(function()
 					pcall(function()
-getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.75,-1.45) * CFrame.Angles(0,math.rad(180),0)
+getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.85,-1.45) * CFrame.Angles(0,math.rad(180),0)
 					end)
 				end)
 			end
