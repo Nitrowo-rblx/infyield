@@ -1,0 +1,147 @@
+local commands = {}
+local oldhip 
+commands["gbang"] = {
+    ["ListName"] = "gbang [plr]",
+    ["Description"] = "Get banged by a player.",
+    ["Aliases"] = {"getbang"},
+    ["Function"] = function(args, speaker)
+		if r15(speaker) then
+			execCmd('ungbang')
+			local players = getPlayer(args[1], speaker)
+			for i,plr in pairs(players) do
+				Players.LocalPlayer.Character.Animate.Disabled = true
+				for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+   					 v:Stop()
+				end
+				task.wait()
+				GBANGAnim = Instance.new("Animation")
+				GBANGAnim.AnimationId = "rbxassetid://4686925579"
+				GBANGtrack = Players.LocalPlayer.Character.Humanoid:LoadAnimation(GBANGAnim)
+				GBANGtrack:Play()
+				if args[2] then GBANGtrack:AdjustSpeed(args[2]) else GBANGtrack:AdjustSpeed(8) end
+				gbangDied = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+					GBANGAnim:Destroy()
+					GBANGtrack:Stop()
+					gbangLoop:Disconnect()
+					gbangDied:Disconnect()
+				end)
+				gbangLoop = game:GetService('RunService').Stepped:Connect(function()
+					pcall(function()
+						getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-1)
+					end)
+				end)
+			end
+		else
+			notify('R15 Required','This command requires the r15 rig type')
+		end
+    end
+}
+commands["ungbang"] = {
+    ["ListName"] = "ungbang [plr]",
+    ["Description"] = "Get unbanged by a player.",
+    ["Aliases"] = {"ungetbang"},
+    ["Function"] = function(args, speaker)
+        if gbangLoop then
+			gbangLoop:Disconnect()
+			GBANGAnim:Destroy()
+			GBANGtrack:Stop()
+			Players.LocalPlayer.Character.Animate.Disabled = false
+			gbangDied:Disconnect()
+		end
+    end
+}
+
+commands["suck"] = {
+    ["ListName"] = "suck [plr]",
+    ["Description"] = "Suck a player.",
+    ["Aliases"] = {},
+    ["Function"] = function(args, speaker)
+ oldhip = Players.LocalPlayer.Character.Humanoid.HipHeight
+		if r15(speaker) then
+			execCmd('unsuck')
+			local players = getPlayer(args[1], speaker)
+			for i,plr in pairs(players) do
+				Players.LocalPlayer.Character.Animate.Disabled = true
+				for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetPlayingAnimationTracks()) do
+   					 v:Stop()
+				end
+				task.wait()
+				SuckAnim = Instance.new("Animation")
+				SuckAnim.AnimationId = "rbxassetid://12520993168"
+				Sucktrack = Players.LocalPlayer.Character.Humanoid:LoadAnimation(SuckAnim)
+				Sucktrack:Play()
+				Sucktrack:AdjustSpeed(0)
+				SuckAnim2 = Instance.new("Animation")
+				SuckAnim2.AnimationId = "rbxassetid://537260400"
+				Sucktrack2 = Players.LocalPlayer.Character.Humanoid:LoadAnimation(SuckAnim2)
+				Sucktrack2:Play()
+				SuckDied = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+					SuckAnim:Destroy()
+					Sucktrack:Stop()
+					SuckAnim2:Destroy()
+					Sucktrack2:Stop()
+					SuckLoop:Disconnect()
+					SuckDied:Disconnect()
+				end)
+				SuckLoop = game:GetService('RunService').Stepped:Connect(function()
+getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.75,-1.45) * CFrame.Angles(0,math.rad(180),0)
+				end)
+			end
+		else
+	execCmd('unsuck')
+	local players = getPlayer(args[1], speaker)
+	for i,plr in pairs(players) do
+				SuckAnim = Instance.new("Animation")
+				SuckAnim.AnimationId = "rbxassetid://183294396"
+				Sucktrack = Players.LocalPlayer.Character.Humanoid:LoadAnimation(SuckAnim)
+				Sucktrack:Play()
+				Sucktrack:AdjustSpeed(0)
+				SuckAnim2 = Instance.new("Animation")
+				SuckAnim2.AnimationId = "rbxassetid://287325678"
+				Sucktrack2 = Players.LocalPlayer.Character.Humanoid:LoadAnimation(SuckAnim2)
+				Sucktrack2:Play()
+	 game.Players.LocalPlayer.Character.Humanoid.HipHeight = -0.45
+	 				SuckDied = Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+					SuckAnim:Destroy()
+					Sucktrack:Stop()
+					SuckAnim2:Destroy()
+					Sucktrack2:Stop()
+					SuckLoop:Disconnect()
+					SuckDied:Disconnect()
+				end)
+	 				SuckLoop = game:GetService('RunService').Stepped:Connect(function()
+					pcall(function()
+getRoot(Players.LocalPlayer.Character).CFrame = Players[plr].Character.HumanoidRootPart.CFrame * CFrame.new(0,-0.75,-1.45) * CFrame.Angles(0,math.rad(180),0)
+					end)
+				end)
+			end
+		end
+    end
+}
+commands["unsuck"] = {
+    ["ListName"] = "unsuck",
+    ["Description"] = "Unsuck a player.",
+    ["Aliases"] = {},
+    ["Function"] = function(args, speaker)
+        if SuckLoop then
+			SuckLoop:Disconnect()
+			SuckAnim:Destroy()
+			Sucktrack:Stop()
+			pcall(function()
+			SuckAnim2:Destroy()
+			Sucktrack2:Stop()
+			end)
+			Players.LocalPlayer.Character.Humanoid.HipHeight = oldhip	
+			Players.LocalPlayer.Character.Animate.Disabled = false
+			SuckDied:Disconnect()
+		end
+    end
+}
+
+
+
+return {
+    ["PluginName"] = "More Sex+",
+    ["PluginDescription"] = "Made Better By Nitrowo",
+    ["Commands"] = commands
+}
