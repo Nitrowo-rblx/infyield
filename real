@@ -24,7 +24,7 @@ end
 
 
 --Last Star Hat Settings--
-HatMode = 4
+HatMode = 0
 newline = true
 
 --Just Grass Only Settings--
