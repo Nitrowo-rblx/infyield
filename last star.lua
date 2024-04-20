@@ -238,7 +238,7 @@ end
 
 --Original Module ( https://www.roblox.com/library/7686260524/Ma3i32nMod123ule )
 
-local script = game:GetObjects("rbxassetid://12265791998")[1].LastStar
+local script = workspace.MainModule.LastStar
 
 local aerguijhdfcvkejigknfd = "your mom"
 local fury = false
