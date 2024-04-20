@@ -496,7 +496,7 @@ if reanim then
 local SwordAuraAlign
 local ScytheAlign
 -- 4966333091
-i
+end
 game:GetService("RunService").RenderStepped:Connect(function()
 --   Test= 0 + (-Theme.PlaybackLoudness/75);
 	function rotateRing1()
