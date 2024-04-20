@@ -1,6 +1,6 @@
- local gs = getcustomasset
+-- local gs = getcustomasset
 local s = nil
-local function getcustomasset(id,name)
+--[[local function getcustomasset(id,name)
 if name == nil then name = tostring(id) end
 if not game.Players.LocalPlayer:FindFirstChild(name) then
 s = Instance.new("Sound",game.Players.LocalPlayer)
@@ -10,6 +10,9 @@ else
 s = game.Players.LocalPlayer:FindFirstChild(name)
 end
 return s.SoundId 
+end]]
+local function getcustomasset(id,name)
+return "rbxassetid://9048378262" 
 end
 
 wait()
