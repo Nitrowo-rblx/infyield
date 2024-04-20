@@ -456,29 +456,6 @@ function Library.FindHat(Name, Size)
 	end
 end
 
-function Library.GetHatFromMesh(hatid)
-	local Hat = game:GetObjects("rbxassetid://"..tostring(hatid))[1]
-	local HatMesh = Hat.Handle:FindFirstChildOfClass("SpecialMesh")
-	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-		if v:IsA("Accessory") then
-			if v.Handle:IsA("MeshPart") then
-				if v.Handle.MeshId == HatMesh.MeshId then
-					print(v.Name)
-					return v
-					
-				end
-			elseif v.Handle:IsA("BasePart") then
-				if v.Handle:FindFirstChildOfClass("SpecialMesh") then
-					if v.Handle:FindFirstChildOfClass("SpecialMesh").MeshId == HatMesh.MeshId then						
-						print(v.Name)
-						
-						return v
-					end
-				end
-			end
-		end
-	end
-end
 
 function alignn(Part0,Part1,Position,Angle)
     local Attachment1 = Instance.new("Attachment", Part0)
@@ -519,24 +496,7 @@ if reanim then
 local SwordAuraAlign
 local ScytheAlign
 -- 4966333091
-if Library.GetHatFromMesh(4932541287) then
-	local hat = Library.GetHatFromMesh(4932541287)
-	hat.Handle.AccessoryWeld:Remove()
-	SwordAuraAlign = alignn(hat.Handle, core.Base.Penta, Vector3.new(-0,0,0), Vector3.new(-0, 0, 0))
-	--table.remove(WingHats, 1)
-	--wait()
-	print('aligned')
-end
-
-if Library.GetHatFromMesh(4966333091) then
-	local hat = Library.GetHatFromMesh(4966333091)
-	hat.Handle.AccessoryWeld:Remove()
-	ScytheAlign = alignn(hat.Handle, core.Base.Penta, Vector3.new(-0,0,0), Vector3.new(-0, 0, 0))
-	--table.remove(WingHats, 1)
-	--wait()
-	print('aligned')
-end
-
+i
 game:GetService("RunService").RenderStepped:Connect(function()
 --   Test= 0 + (-Theme.PlaybackLoudness/75);
 	function rotateRing1()
@@ -765,59 +725,7 @@ cheapomode = function()
 		--wait()
 		print('aligned')
 	end
-	if Library.GetHatFromMesh(48474313) then
-		local hat = Library.GetHatFromMesh(48474313)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing1.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
-
-	if Library.GetHatFromMesh(48474294) then
-		local hat = Library.GetHatFromMesh(48474294)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing2.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
-
-	if Library.GetHatFromMesh(62234425) then
-		local hat = Library.GetHatFromMesh(62234425)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing3.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
-
-	if Library.GetHatFromMesh(62724852) then
-		local hat = Library.GetHatFromMesh(62724852)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing4.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
-
-	if Library.GetHatFromMesh(451220849) then
-		local hat = Library.GetHatFromMesh(451220849)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing5.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
-
-	if Library.GetHatFromMesh(63690008) then
-		local hat = Library.GetHatFromMesh(63690008)
-		hat.Handle.AccessoryWeld:Remove()
-		Library.RemoveMesh(hat.Handle)
-		alignn(hat.Handle, wing6.Primary, Vector3.new(-6, 0, 0), Vector3.new(-0, 90, 0))
-		--table.remove(WingHats, 1)
-		--wait()
-	end
+	
 end
 layschips = function()
 	local HATDUPES = Library.MakeTableOfHats("Mesh",{Mesh_Id=4755247775})
